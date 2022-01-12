@@ -30,7 +30,42 @@ router.get("/", (req, res) => {
   });
 
 
-  
+router.post("/", (req, res) => {
+  const {
+    name,
+    prenom,
+    email,
+    password,
+    passwordconfirm,
+    centreid
+} = req.body
+
+  async function makeGetRequest() {
+
+    const form_data = {
+      name: name,
+      prenom: prenom,
+      email: email,
+      password: password,
+      passwordconfirm: passwordconfirm,
+      centreid: 1
+  }
+
+    let ress = await axios.post('http://localhost:3030/auth/generaladmin/creation', form_data);
+
+    console.log("admin center inserted");
+    let data = ress.data;
+
+    console.log(data);
+    res.redirect('/usercenter')
+
+}
+
+makeGetRequest();
+
+});
+
+
   router.post("/delete_admincenter/:id", (req, res) => {
     const {
         id,
@@ -43,7 +78,7 @@ router.get("/", (req, res) => {
     .then(res => console.log('Deleted successfully !'))
     .catch(err => console.error(err));
 
-    res.redirect('/generaladmin/')
+    res.redirect('/generaladmin')
 
   });
 

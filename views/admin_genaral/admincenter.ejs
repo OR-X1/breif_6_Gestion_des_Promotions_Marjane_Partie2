@@ -171,7 +171,6 @@
             </a>
 
 
-
             <div class="modal fade" id="addadmincenter" tabindex="-1" aria-labelledby="addadmincenterLabel" aria-hidden="true">
                 <div class="modal-dialog">
                   <div class="modal-content">
@@ -179,26 +178,37 @@
                       <h5 class="modal-title" id="addadmincenterLabel">Update</h5>
                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
+
+                    <form action="/usercenter" method="post">
                     <div class="modal-body">
-                      <form>
                         <div class="mb-3">
                           <label for="recipient-name" class="col-form-label">Nom:</label>
-                          <input type="text" class="form-control" id="recipient-name" value="">
+                          <input type="text" class="form-control" name="name" id="recipient-name" value="">
                         </div>
                         <div class="mb-3">
                           <label for="message-text" class="col-form-label">Prenom:</label>
-                          <input type="text" class="form-control" id="recipient-name" value="">
+                          <input type="text" class="form-control" name="prenom" id="recipient-name" value="">
                         </div>
                         <div class="mb-3">
                             <label for="message-text" class="col-form-label">Email:</label>
-                            <input type="text" class="form-control" id="recipient-name" value="">
+                            <input type="text" class="form-control" name="email" id="recipient-name" value="">
                           </div>
-                      </form>
-                    </div>
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                      <button type="button" class="btn btn-primary">Update</button>
-                    </div>
+                          <div class="mb-3">
+                            <label for="message-text" class="col-form-label">Password:</label>
+                            <input type="text" class="form-control" name="password" id="recipient-name" value="">
+                          </div>
+                          <div class="mb-3">
+                            <label for="message-text" class="col-form-label">Password:</label>
+                            <input type="text" class="form-control" name="passwordconfirm" id="recipient-name" value="">
+                          </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Update</button>
+                        </div>
+                    </form>
+
+
                   </div>
                 </div>
               </div>

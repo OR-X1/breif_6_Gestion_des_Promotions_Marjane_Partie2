@@ -80,18 +80,14 @@
                         <div class="dropdown d-inline-block">
                             <button type="button" class="btn header-item bg-soft-light border-start border-end" id="page-header-user-dropdown"
                             data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="d-none d-xl-inline-block ms-1 fw-medium">Admin</span>
+                                <span class="d-none d-xl-inline-block ms-1 fw-medium"><%= cookiesUser %> </span>
                                 <i class="mdi mdi-chevron-down d-none d-xl-inline-block"></i>
                             </button>
                             <div class="dropdown-menu dropdown-menu-end">
                                 <!-- item-->
-                                <a class="dropdown-item" href="#"
-                                onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                <a class="dropdown-item" href="/logout">
                                 <i class="mdi mdi-logout font-size-16 align-middle me-1"></i> Logout</a>
                             </div>
-                            <form id="logout-form" action="#" method="POST" class="d-none">
-                                
-                            </form>
                         </div>
             
                     </div>
@@ -130,10 +126,6 @@
                         <span data-key="t-dashboard ">Centre</span>
                     </a>
                 </li>
-
-
-
-
 
             </ul>
 
@@ -181,20 +173,21 @@
                     <div class="col-xl-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title mb-0">statistique</h4>
+                                <h4 class="card-title mb-0">statistique </h4>
                             </div>
                             <div class="card-body">
-
                                 <div id="line_chart_datalabel" data-colors='["#2ab57d", "#5156be", "#BE5151"]' class="apex-charts" dir="ltr"></div>                              
                             </div>
                         </div>
                     </div>
-                  
                 </div> 
                 <div class="col-4" style="height: 500px;">
                     <div class="card">
                         <div class="card-header">
-                            <h4 class="card-title mb-0">statistique</h4>
+                            <h4 class="card-title mb-0">statistique </h4>
+                            <p style="display: none;" id="valide_promo"><%= valide_promo %></p>
+                            <p style="display: none;" id="invalide_promo"><%= invalide_promo %></p>
+                            <p style="display: none;" id="promo_pasencore"><%= promo_pasencore %></p>
                         </div>
                         <div class="card-body">
 
@@ -203,8 +196,9 @@
                     </div>
                 </div>
 
-                <script>
+                    <script>
                     
+
                     var ctx = document.getElementById('myChartline');
                     var myChart = new Chart(ctx, {
                         type: 'line',
@@ -212,7 +206,7 @@
                             labels: ['valide promo', 'invalide promo', 'promo pasencore'],
                             datasets: [{
                                 label: '# of Votes',
-                                data: [12, 19, 3],
+                                data: [12, 50, 3],
                                 backgroundColor: [
                                     'rgba(255, 99, 132, 0.2)',
                                     'rgba(54, 162, 235, 0.2)',
@@ -235,36 +229,42 @@
                         }
                     });
                     </script>
+
                     <script>
-                    var ctx = document.getElementById('myChart');
-                    var myChart = new Chart(ctx, {
-                        type: 'doughnut',
-                        data: {
-                            labels: ['valide promo', 'invalide promo', 'promo pasencore'],
-                            datasets: [{
-                                label: '# of Votes',
-                                data: [12, 19, 3],
-                                backgroundColor: [
-                                    'rgba(255, 99, 132, 0.2)',
-                                    'rgba(54, 162, 235, 0.2)',
-                                    'rgba(255, 206, 86, 0.2)'
-                                ],
-                                borderColor: [
-                                    'rgba(255, 99, 132, 1)',
-                                    'rgba(54, 162, 235, 1)',
-                                    'rgba(255, 206, 86, 1)'
-                                ],
-                                borderWidth: 1
-                            }]
-                        },
-                        options: {
-                            scales: {
-                                y: {
-                                    beginAtZero: true
+
+                        var valide_promo = document.getElementById("valide_promo").innerHTML;
+                        var invalide_promo = document.getElementById("invalide_promo").innerHTML;
+                        var promo_pasencore = document.getElementById("promo_pasencore").innerHTML;
+
+                        var ctx = document.getElementById('myChart');
+                        var myChart = new Chart(ctx, {
+                            type: 'doughnut',
+                            data: {
+                                labels: ['valide promo', 'invalide promo', 'promo pasencore'],
+                                datasets: [{
+                                    label: '# of Votes',
+                                    data: [valide_promo, invalide_promo , promo_pasencore],
+                                    backgroundColor: [
+                                        'rgba(255, 99, 132, 0.2)',
+                                        'rgba(54, 162, 235, 0.2)',
+                                        'rgba(255, 206, 86, 0.2)'
+                                    ],
+                                    borderColor: [
+                                        'rgba(255, 99, 132, 1)',
+                                        'rgba(54, 162, 235, 1)',
+                                        'rgba(255, 206, 86, 1)'
+                                    ],
+                                    borderWidth: 1
+                                }]
+                            },
+                            options: {
+                                scales: {
+                                    y: {
+                                        beginAtZero: true
+                                    }
                                 }
                             }
-                        }
-                    });
+                        });
                     </script>
             </div>
            

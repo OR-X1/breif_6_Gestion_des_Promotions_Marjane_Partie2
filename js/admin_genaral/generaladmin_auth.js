@@ -1,24 +1,21 @@
 const express = require('express');
+// const cookieParser = require('cookie-parser')
 const router = express.Router();
-// const fetch = require("node-fetch");
-const cookieParser = require("cookie-parser");
-const fetch = require("cross-fetch")
 const axios = require('axios');
 const { cookie } = require('express/lib/response');
-const app = express();
+// const app = express();
 
-app.locals.data = {
-  'token' : ''
-};
+
+
+// app.use(express.json())
+// app.use(cookieParser())
+
+// app.use(express.urlencoded({ extended : true }))
 
 
   router.get("/", (req, res) => {
         res.render('admin_genaral/login')
-
   });
-
-  
-
 
   router.post("/", (req, res) => {
     const {
@@ -27,15 +24,6 @@ app.locals.data = {
   } = req.body
   console.log(password);
   
-
-    //  axios.post("http://localhost:3030/auth/generaladmin/login", {
-      
-    //     email: email,
-    //     password: password
-      
-    // }
-    // ).then(res => console.log('Deleted successfully !'))
-    // .catch(err => console.error(err))
     async function makeGetRequest() {
 
       const form_data = {
@@ -44,52 +32,29 @@ app.locals.data = {
       }
 
       let ress = await axios.post('http://localhost:3030/auth/generaladmin/login', form_data);
-      
+
       let data = ress.data;
-      // ress.cookie("access_token", data.token, {
-      //   httpOnly: true,
-      // });
+      if(data?.err ==undefined){
 
-      console.log(data.token);
+        console.log("correct");
+        console.log(data.data[0].nom);
+        res.cookie('datauser', data.data[0].nom + " " + data.data[0].prenom)
 
-      app.locals.data.token = "dedededded";
+        console.log(data.token);
+        res.cookie('token', data.token)
 
-      console.log(app.locals.data.token);
+        res.redirect('/generaladmin')
 
-      res.redirect('/generaladmin')
+      }else{
+        console.log("inccorrect");
+        console.log(data.err);
+        res.redirect('/login')
+      }
 
   }
 
   makeGetRequest();
 
   });
-
-  router.post("/delete_admincenter/:id", (req, res) => {
-    const {
-        id,
-    } = req.params
-    // fetch("http://localhost:3030/auth/generaladmin/delete/"+ id)
-    // .then(data => console.log(data))
-    // console.log("deleted");
-
-    axios.post(`http://localhost:3030/auth/generaladmin/delete/${id}`)
-    .then(res => console.log('Deleted successfully !'))
-    .catch(err => console.error(err));
-
-    res.redirect('/generaladmin')
-
-  });
-
-
-  
-
-
-
-// router.post('/getalladmincenter', authController.isLoginIn, authController.getall)
-// router.post('/update/:id', authController.isLoginIn, authController.update)
-// router.post('/delete/:id', authController.isLoginIn, authController.delete)
-// router.post('/creationcentre', authController.isLoginIn, authController.creationcentre)
-// router.post('/login', authController.login)
-// router.get('/logout', authController.logout)
 
 module.exports = router;

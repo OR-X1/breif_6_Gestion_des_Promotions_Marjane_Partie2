@@ -17,23 +17,33 @@ app.use(express.urlencoded({
     extended: false
 }))
 
-
 app.use(express.json())
 app.use(cookieParser())
 app.set('view engine', 'ejs');
 
-app.use(bodyParser.urlencoded({ extended : true }))
+app.use(bodyParser.urlencoded({ extended : false }))
 
-// app.get('/', (req, res) => {
-//     res.render('index')
-// })
 
-app.use('/generaladmin', require('./js/admin_genaral/generaladmin'));
-app.use('/usercenter', require('./js/admin_genaral/admincenter'));
-app.use('/center', require('./js/admin_genaral/center'));
-app.use('/generaladmin/login', require('./js/admin_genaral/generaladmin_auth'));
-// app.use('/responsablerayon', require('./js/rayon/rayon_auth'));
-// app.use('/centreadmin', require('./js/admin_centre/centreadmin_auth'));
+function requireLogin(req, res, next) {
+    const { cookies } = req
+
+    if (cookies.token) {
+      next(); // allow the next route to run
+    } else {
+      // require the user to log in
+      res.redirect("/login"); // or render a form, etc.
+    }
+  }
+
+
+app.use('/generaladmin', requireLogin,  require('./js/admin_genaral/generaladmin'));
+app.use('/usercenter', requireLogin, require('./js/admin_genaral/admincenter'));
+app.use('/center', requireLogin, require('./js/admin_genaral/center'));
+
+app.use('/login', require('./js/admin_genaral/generaladmin_auth'));
+app.use('/logout', require('./js/admin_genaral/logout'));
+
+
 
 
 app.listen(5000, () => {
