@@ -43,6 +43,13 @@ app.use('/center', requireLogin, require('./js/admin_genaral/center'));
 app.use('/login', require('./js/admin_genaral/generaladmin_auth'));
 app.use('/logout', require('./js/admin_genaral/logout'));
 
+// app.use('/responsablerayon', requireLogin,  require('./js/admin_centre/responsablerayon'));
+// app.use('/usercenter', requireLogin, require('./js/admin_genaral/admincenter'));
+// app.use('/center', requireLogin, require('./js/admin_genaral/center'));
+
+// app.use('/centrelogin', require('./js/admin_centre/admin_centre_auth'));
+// app.use('/centrelogout', require('./js/admin_centre/logout'));
+
 
 
 
