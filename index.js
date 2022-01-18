@@ -46,6 +46,17 @@ function requireLoginAdmin(req, res, next) {
     }
   }
 
+  function requireLoginRayon(req, res, next) {
+    const { cookies } = req
+
+    if (cookies.token_rayon) {
+      next(); // allow the next route to run
+    } else {
+      // require the user to log in
+      res.redirect("/centrelogin"); // or render a form, etc.
+    }
+  }
+
 app.use('/generaladmin', requireLoginAdmin,  require('./js/admin_genaral/generaladmin'));
 app.use('/usercenter', requireLoginAdmin, require('./js/admin_genaral/admincenter'));
 app.use('/center', requireLoginAdmin, require('./js/admin_genaral/center'));
@@ -61,6 +72,15 @@ app.use('/promotion', requireLoginCenter, require('./js/admin_centre/promotion')
 
 app.use('/centrelogin', require('./js/admin_centre/admin_centre_auth'));
 app.use('/centrelogout', require('./js/admin_centre/logout'));
+
+
+
+// app.use('/responsablerayon', requireLoginRayon, require('./js/responsable_rayon/responsablerayon'));
+app.use('/updatepromotion', require('./js/responsable_rayon/promotion'));
+// app.use('/promotion', require('./js/admin_centre/promotion'));
+
+app.use('/rayonlogin', require('./js/responsable_rayon/responsable_rayon_auth'));
+app.use('/rayonlogout', require('./js/responsable_rayon/logout'));
 
 
 app.listen(5000, () => {

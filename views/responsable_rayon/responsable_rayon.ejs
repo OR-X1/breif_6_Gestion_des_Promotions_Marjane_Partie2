@@ -1,0 +1,234 @@
+
+
+<%- include('header'); -%>
+
+             <!-- ========================== Left Sidebar End ========================== -->
+
+
+            <div class="main-content">
+
+    <div class="page-content">
+        <div class="container-fluid">
+
+            <!-- start page title -->
+            <div class="row">
+                <div class="col-12">
+                    <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                        <h3 class="mb-sm-0">Admins</h3>
+
+                        <!-- <div class="page-title-right">
+                            <ol class="breadcrumb m-0">
+                                <li class="breadcrumb-item"><a href="javascript: void(0);">Admins</a></li>
+                                <li class="breadcrumb-item active">List</li>
+                            </ol>
+                        </div> -->
+
+                    </div>
+                </div>
+            </div>
+            <!-- end page title -->
+
+            <!-- <h4 class="card-title">table admins</h4> -->
+            <p class="card-description">
+                <!-- Button trigger modal -->
+            <a href="#" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#addadmincenter" data-bs-whatever="@mdo">
+               add admin
+            </a>
+
+
+            <div class="modal fade" id="addadmincenter" tabindex="-1" aria-labelledby="addadmincenterLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="addadmincenterLabel">Update</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+
+                    <form action="/userrayon" method="post">
+                    <div class="modal-body">
+                        <div class="mb-3">
+                          <label for="recipient-name" class="col-form-label">Nom:</label>
+                          <input type="text" class="form-control" name="name" id="recipient-name" value="">
+                        </div>
+                        <div class="mb-3">
+                          <label for="message-text" class="col-form-label">Prenom:</label>
+                          <input type="text" class="form-control" name="prenom" id="recipient-name" value="">
+                        </div>
+                        <div class="mb-3">
+                            <label for="message-text" class="col-form-label">Email:</label>
+                            <input type="text" class="form-control" name="email" id="recipient-name" value="">
+                          </div>
+                          <div class="mb-3">
+                            <label for="message-text" class="col-form-label">Password:</label>
+                            <input type="text" class="form-control" name="password" id="recipient-name" value="">
+                          </div>
+                          <div class="mb-3">
+                            <label for="message-text" class="col-form-label">Password:</label>
+                            <input type="text" class="form-control" name="passwordconfirm" id="recipient-name" value="">
+                          </div>
+
+                          <div class="mb-3">
+                            <label for="message-text" class="col-form-label">category:</label>
+                            <select class="form-select" name="category" id="">
+                                <option value="electronique">electronique </option>
+                                <option value="electromenager">electromenager </option>
+                                <option value="multimedia">multimedia </option>
+                            </select>
+                          </div>
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Save</button>
+                        </div>
+                    </form>
+
+                  </div>
+                </div>
+              </div>
+
+
+
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+
+                        </div>
+                        <div class="card-body">
+                            <table id="datatable" class="table table-bordered dt-responsive nowrap w-100">
+                                <thead>
+                                <tr>
+
+                                    <th>
+                                        id
+                                    </th>
+                                    <th>
+                                        nom
+                                    </th>
+                                    <th>
+                                        prenom
+                                    </th>
+                                    <th>
+                                        email
+                                    </th>
+                                    <th>
+                                      category
+                                    </th>
+
+                                </tr>
+                                </thead>
+
+                                <tbody>
+
+                                <% if (getallresponsablerayon.length > 0) { %> 
+
+                                    <% getallresponsablerayon.forEach(function(user){ %>
+
+                                <tr>
+
+                                     <td class="py-1">
+                                        <%= user.id %>
+                                     </td>
+                                     <td class="py-1">
+                                        <!-- {{nom}} -->
+                                        <%= user.nom %>
+                                    </td>
+                                    <td class="py-1">
+                                        <%= user.prenom %>
+                                    </td>
+                                    <td class="py-1">
+                                        
+                                        <%= user.email %>
+                                    </td>
+                                    <td class="py-1">
+                                        <%= user.category %>
+                                    </td>
+                                     <td class="">
+                                        <div class="dropdown mt-4 mt-sm-0">
+                                            <a href="#" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                                Actions <i class="mdi mdi-chevron-down"></i>
+                                            </a>
+
+                                            <div class="dropdown-menu">
+                                                <a class="dropdown-item" href="#">
+                                                    <form action="userrayon/delete_responsablerayon/<%= user.id %>" method="post">
+
+                                                        <button class=" text-danger delete-confirm" style="background: none;border:none" data-name="#"  type="submit">
+                                                          <i class=" bx bx-trash-alt"></i> Delete
+                                                        </button>
+                                                    </form>
+                                                </a>
+                                                <a href="#" class="dropdown-item text-warning" data-bs-toggle="modal" data-bs-target="#exampleModal<%= user.id %>" data-bs-whatever="@mdo"><i class=" bx bx-pencil"></i> Edit<i class="ti-pencil"></i></a>
+                                                   </div>
+                                        </div>
+
+                                     </td>
+                                </tr>
+
+                                <div class="modal fade" id="exampleModal<%= user.id %>" tabindex="-1" aria-labelledby="exampleModalLabel<%= user.id %>" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                      <div class="modal-content">
+                                        <div class="modal-header">
+                                          <h5 class="modal-title" id="exampleModalLabel<%= user.id %>">Update</h5>
+                                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                          <form>
+                                            <div class="mb-3">
+                                              <label for="recipient-name" class="col-form-label">Nom:</label>
+                                              <input type="text" class="form-control" id="recipient-name" value="<%= user.nom %>">
+                                            </div>
+                                            <div class="mb-3">
+                                              <label for="message-text" class="col-form-label">Prenom:</label>
+                                              <input type="text" class="form-control" id="recipient-name" value="<%= user.prenom %>">
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="message-text" class="col-form-label">Email:</label>
+                                                <input type="text" class="form-control" id="recipient-name" value="<%= user.email %>">
+                                              </div>
+                                          </form>
+                                        </div>
+                                        <div class="modal-footer">
+                                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                          <button type="button" class="btn btn-primary">Update</button>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                
+                                    <% }); %>
+
+                                <% } else{ %> 
+
+                                    <tr class="text-center">
+                                        <td colspan="5">No record
+                                        </td>
+                                        </tr>
+                    
+                                        
+                                    
+                                <% } %>
+                                
+                                
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <!-- end cardaa -->
+                </div> <!-- end col -->
+            </div> <!-- end row -->
+           
+            
+        </div> <!-- container-fluid -->
+    </div>
+    <!-- End Page-content -->
+
+
+
+</div>
+
+
+<%- include('footer'); -%>

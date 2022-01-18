@@ -6,15 +6,8 @@ const { cookie } = require('express/lib/response');
 // const app = express();
 
 
-
-// app.use(express.json())
-// app.use(cookieParser())
-
-// app.use(express.urlencoded({ extended : true }))
-
-
   router.get("/", (req, res) => {
-        res.render('admin_genaral/login')
+        res.render('responsable_rayon/login')
   });
 
   router.post("/", (req, res) => {
@@ -23,7 +16,7 @@ const { cookie } = require('express/lib/response');
       password,
   } = req.body
   console.log(password);
-
+  
     async function makeGetRequest() {
 
       const form_data = {
@@ -31,7 +24,7 @@ const { cookie } = require('express/lib/response');
         password: password
       }
 
-      let ress = await axios.post('http://localhost:3030/auth/generaladmin/login', form_data);
+      let ress = await axios.post('http://localhost:3030/auth/responsablerayon/login', form_data);
 
       let data = ress.data;
       if(data?.err ==undefined){
@@ -41,16 +34,15 @@ const { cookie } = require('express/lib/response');
         res.cookie('datauser', data.data[0].nom + " " + data.data[0].prenom)
 
         console.log(data.token);
-        res.cookie('token', data.token)
+        res.cookie('token_rayon', data.token)
 
-        res.redirect('/generaladmin')
+        res.redirect('/responsablerayon')
 
       }else{
         console.log("inccorrect");
         console.log(data.err);
-        res.redirect('/login')
+        res.redirect('/rayonlogin')
       }
-
   }
 
   makeGetRequest();
