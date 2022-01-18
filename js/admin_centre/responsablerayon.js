@@ -7,32 +7,31 @@ const axios = require('axios');
 const app = express();
 
 
-router.get("/", (req, res) => {
-
-      res.render('admin_centre/dashboard')
-
-});
-
-
 // router.get("/", (req, res) => {
-//     // const obj = await fetchData()
-//     fetch("http://localhost:3030/auth/generaladmin/getalladmincenter")
-//     .then(res => res.json())
-//     .then(data => {
 
-//         console.log("haaahaaa ");
-//         // console.log(data.result);
-//         console.log(data.msg);
-//         const { cookies } = req
+//       res.render('admin_centre/dashboard')
+
+// });
+
+
+router.get("/", (req, res) => {
+    // const obj = await fetchData()
+    fetch("http://localhost:3030/auth/centreadmin/getallresponsablerayon")
+    .then(res => res.json())
+    .then(data => {
+
+        console.log("haaahaaa ");
+        // console.log(data.result);
+        console.log(data.msg);
+        const { cookies } = req
         
-//         res.render('admin_genaral/admincenter',{
-//             getalladmincenter : data.getalladmincenter,
-//             getallcenter : data.result,
-//             cookiesUser: cookies.datauser
-//         })
-//     })
+        res.render('admin_centre/responsable_rayon',{
+          getallresponsablerayon : data.getallresponsablerayon,
+            cookiesUser: cookies.datauser
+        })
+    })
 
-//   });
+  });
 
 
 router.post("/", (req, res) => {
@@ -42,7 +41,7 @@ router.post("/", (req, res) => {
     email,
     password,
     passwordconfirm,
-    center_id
+    category
 } = req.body
 
   async function makeGetRequest() {
@@ -53,16 +52,16 @@ router.post("/", (req, res) => {
       email: email,
       password: password,
       passwordconfirm: passwordconfirm,
-      centreid: center_id
+      category: category
   }
 
-    let ress = await axios.post('http://localhost:3030/auth/generaladmin/creation', form_data);
+    let ress = await axios.post('http://localhost:3030/auth/centreadmin/creation', form_data);
 
     console.log("admin center inserted");
     let data = ress.data;
 
     console.log(data);
-    res.redirect('/usercenter')
+    res.redirect('/userrayon')
 
 }
 
@@ -71,7 +70,7 @@ makeGetRequest();
 });
 
 
-  router.post("/delete_admincenter/:id", (req, res) => {
+  router.post("/delete_responsablerayon/:id", (req, res) => {
     const {
         id,
     } = req.params
@@ -79,11 +78,11 @@ makeGetRequest();
     // .then(data => console.log(data))
     // console.log("deleted");
 
-    axios.post(`http://localhost:3030/auth/generaladmin/delete/${id}`)
+    axios.post(`http://localhost:3030/auth/centreadmin/delete/${id}`)
     .then(res => console.log('Deleted successfully !'))
     .catch(err => console.error(err));
 
-    res.redirect('/generaladmin')
+    res.redirect('/userrayon')
 
   });
 

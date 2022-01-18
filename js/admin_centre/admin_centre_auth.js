@@ -37,7 +37,7 @@ const { cookie } = require('express/lib/response');
         console.log(data.token);
         res.cookie('token_centreadmin', data.token)
 
-        res.redirect('/generaladmin')
+        res.redirect('/centeradmin')
 
       }else{
         console.log("inccorrect");

@@ -13,11 +13,11 @@ const app = express();
 
   router.get("/", (req, res) => {
     
-    res.cookie('token', 'logout', {
+    res.cookie('token_centreadmin', 'logout', {
       expires: new Date(Date.now() + 2 * 1000),
       httpOnly: true
     })
-    res.redirect('/login')
+    res.redirect('/centrelogin')
 
   });
 

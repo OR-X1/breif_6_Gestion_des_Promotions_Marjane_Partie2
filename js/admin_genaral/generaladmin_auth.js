@@ -34,6 +34,11 @@ const { cookie } = require('express/lib/response');
       let ress = await axios.post('http://localhost:3030/auth/generaladmin/login', form_data);
 
       let data = ress.data;
+      if(data?.msg){
+        console.log("inccorrect");
+        console.log(data.msg);
+        res.redirect('/login')
+      }else{
       if(data?.err ==undefined){
 
         console.log("correct");
@@ -50,6 +55,7 @@ const { cookie } = require('express/lib/response');
         console.log(data.err);
         res.redirect('/login')
       }
+    }
 
   }
 

@@ -1,0 +1,227 @@
+
+
+<%- include('header'); -%>
+
+             <!-- ========================== Left Sidebar End ========================== -->
+
+            <div class="main-content">
+
+    <div class="page-content">
+        <div class="container-fluid">
+
+            <!-- start page title -->
+            <div class="row">
+                <div class="col-12">
+                    <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                        <h3 class="mb-sm-0">center</h3>
+
+                        <!-- <div class="page-title-right">
+                            <ol class="breadcrumb m-0">
+                                <li class="breadcrumb-item"><a href="javascript: void(0);">Admins</a></li>
+                                <li class="breadcrumb-item active">List</li>
+                            </ol>
+                        </div> -->
+
+                    </div>
+                </div>
+            </div>
+            <!-- end page title -->
+
+            <!-- <h4 class="card-title">table admins</h4> -->
+            <p class="card-description">
+                <!-- Button trigger modal -->
+            <a href="#" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#addadmincenter" data-bs-whatever="@mdo">
+               add promotion
+            </a>
+
+            <div class="modal fade" id="addadmincenter" tabindex="-1" aria-labelledby="addadmincenterLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                  <form action="/promotion" method="post">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="addadmincenterLabel">add promotion</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+
+                        <div class="mb-3">
+                          <label for="recipient-name" class="col-form-label">porcentage:</label>
+                          <input type="number" min="0" max="50" class="form-control" id="recipient-name" name="porcentage" value="0">
+                        </div>
+
+                        <div class="mb-3">
+                          <label for="message-text" class="col-form-label ">Produit:</label>
+                          <select class="form-select" name="produit_id" id="">
+                              <% getallproduct.forEach(element => { %>
+                                <option value="<%= element.id %>"><%= element.name %> </option>
+                              <% }) %>
+                          </select>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                      <button type="submit" class="btn btn-primary">save</button>
+                    </div>
+                  </form>
+
+                  </div>
+                </div>
+              </div>
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+
+                        </div>
+                        <div class="card-body">
+                            <table id="datatable" class="table table-bordered dt-responsive nowrap w-100">
+                                <thead>
+                                <tr>
+                                    <th>
+                                      name
+                                    </th>
+                                    <th>
+                                      prix
+                                    </th>
+                                    <th>
+                                      quantite
+                                    </th>
+                                    <th>
+                                      porcentage
+                                    </th>
+                                    <th>
+                                      status
+                                    </th>
+                                    <th>
+                                      commentaire
+                                    </th>
+
+                                </tr>
+                                </thead>
+
+                                <tbody>
+
+                                <% if (getallpromotion.length > 0) { %> 
+
+                                    <% getallpromotion.forEach(function(promotion){ %>
+
+                                <tr>
+
+                                     <td class="py-1">
+                                        <%= promotion.name %>
+                                     </td>
+                                     <td class="py-1">
+                                        <!-- {{nom}} -->
+                                        <%= promotion.prix %>
+                                      </td>
+                                      <td class="py-1">
+                                        <!-- {{nom}} -->
+                                        <%= promotion.quantite %>
+                                      </td>
+                                      <td class="py-1">
+                                          <!-- {{nom}} -->
+                                          <%= promotion.porcentage %>
+                                      </td>
+                                      <td class="py-1">
+                                        <!-- {{nom}} -->
+                                        <%= promotion.status %>
+                                      </td>  
+                                      <td class="py-1">
+                                          <!-- {{nom}} -->
+                                          <%= promotion.commentaire %>
+                                      </td>
+                                      
+                                </tr>
+
+                                
+                                  
+                                    <% }); %>
+
+                                <% } else{ %> 
+
+                                    <tr class="text-center">
+                                        <td colspan="5">No record
+                                        </td>
+                                        </tr>
+                    
+                                        
+                                    
+                                <% } %>
+                                
+                                
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <!-- end cardaa -->
+                </div> <!-- end col -->
+            </div> <!-- end row -->
+           
+            
+        </div> <!-- container-fluid -->
+    </div>
+    <!-- End Page-content -->
+
+
+
+</div>
+
+        </div>
+        <!-- END layout-wrapper -->
+
+
+
+
+        <!-- JAVASCRIPT -->
+        <script src="assets/libs/jquery/jquery.min.js" ></script>
+        <script src="assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <script src="assets/libs/metismenu/metisMenu.min.js"></script>
+        <script src="assets/libs/simplebar/simplebar.min.js"></script>
+        <script src="assets/libs/node-waves/waves.min.js"></script>
+        <script src="assets/libs/feather-icons/feather.min.js"></script>
+        <!-- pace js -->
+        <script src="assets/libs/pace-js/pace.min.js"></script>
+
+        <!-- apexcharts -->
+        <script src="assets/libs/apexcharts/apexcharts.min.js"></script>
+
+        <!-- apexcharts init -->
+        <script src="assets/js/pages/apexcharts.init.js"></script>
+
+        <!-- Plugins js-->
+        <script src="assets/libs/admin-resources/jquery.vectormap/jquery-jvectormap-1.2.2.min.js"></script>
+        <script src="assets/libs/admin-resources/jquery.vectormap/maps/jquery-jvectormap-world-mill-en.js"></script>
+
+         <!-- Required datatable js -->
+         <script src="assets/libs/datatables.net/js/jquery.dataTables.min.js"></script>
+         <script src="assets/libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
+
+         <!-- Buttons examples -->
+         <script src="assets/libs/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+         <script src="assets/libs/datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js"></script>
+         <script src="assets/libs/jszip/jszip.min.js"></script>
+         <script src="assets/libs/pdfmake/build/pdfmake.min.js"></script>
+         <script src="assets/libs/pdfmake/build/vfs_fonts.js')}}"></script>
+         <script src="assets/libs/datatables.net-buttons/js/buttons.html5.min.js"></script>
+         <script src="assets/libs/datatables.net-buttons/js/buttons.print.min.js"></script>
+         <script src="assets/libs/datatables.net-buttons/js/buttons.colVis.min.js"></script>
+
+        <!--  datatable  -->
+        <script src="assets/libs/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+        <script src="assets/libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js"></script>
+        <!-- dashboard init -->
+        <script src="assets/js/pages/dashboard.init.js"></script>
+
+        <!--  datatable  -->
+        <script src="assets/js/app.js"></script>
+
+
+        
+
+    </body>
+
+
+</html>
