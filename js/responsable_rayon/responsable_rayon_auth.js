@@ -32,11 +32,11 @@ const { cookie } = require('express/lib/response');
         console.log("correct");
         console.log(data.data[0].nom);
         res.cookie('datauser', data.data[0].nom + " " + data.data[0].prenom)
-
+        res.cookie('category_rayon', data.data[0].category)
         console.log(data.token);
         res.cookie('token_rayon', data.token)
 
-        res.redirect('/responsablerayon')
+        res.redirect('/updatepromotion')
 
       }else{
         console.log("inccorrect");

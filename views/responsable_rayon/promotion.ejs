@@ -53,6 +53,9 @@
                                       porcentage
                                     </th>
                                     <th>
+                                      category
+                                    </th>
+                                    <th>
                                       status
                                     </th>
                                     <th>
@@ -87,7 +90,19 @@
                                       </td>
                                       <td class="py-1">
                                         <!-- {{nom}} -->
-                                        <%= promotion.status %>
+                                        <%= promotion.category %>
+                                    </td>
+                                      <td class="py-1">
+                                        <% if (promotion.status == 1) { %> 
+                                            <p class="text-success">accept</p>
+                                          <% } else if (promotion.status == 0){ %> 
+                                            
+                                            <p class="text-danger">refuse</p>
+                                          <% } else{ %> 
+                                            
+                                            <p class="text-secundary">encoure</p>
+                                        <% } %>
+                                        
                                       </td>  
                                       <td class="py-1">
 
@@ -107,7 +122,7 @@
                                                 <input type="hidden" name="id" value="<%= promotion.id %>" id="">
                                                   <div class="mb-3">
                                                     <label for="recipient-name" class="col-form-label">Comontaire:</label>
-                                                    <textarea name="commentaire" class="form-control" cols="30" rows="10"></textarea>
+                                                    <textarea name="commentaire" class="form-control" cols="30" rows="10" required></textarea>
                                                   </div>
 
                                                   <div class="mb-3">

@@ -76,7 +76,7 @@ app.use('/centrelogout', require('./js/admin_centre/logout'));
 
 
 // app.use('/responsablerayon', requireLoginRayon, require('./js/responsable_rayon/responsablerayon'));
-app.use('/updatepromotion', require('./js/responsable_rayon/promotion'));
+app.use('/updatepromotion', requireLoginRayon, require('./js/responsable_rayon/promotion'));
 // app.use('/promotion', require('./js/admin_centre/promotion'));
 
 app.use('/rayonlogin', require('./js/responsable_rayon/responsable_rayon_auth'));

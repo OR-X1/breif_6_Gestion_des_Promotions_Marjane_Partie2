@@ -92,6 +92,9 @@
                                       porcentage
                                     </th>
                                     <th>
+                                      category
+                                    </th>
+                                    <th>
                                       status
                                     </th>
                                     <th>
@@ -126,7 +129,19 @@
                                       </td>
                                       <td class="py-1">
                                         <!-- {{nom}} -->
-                                        <%= promotion.status %>
+                                        <%= promotion.category %>
+                                    </td>
+                                      <td class="py-1">
+                                        <!-- {{nom}} -->
+                                        <% if (promotion.status == 1) { %> 
+                                          <p class="text-success">accept</p>
+                                        <% } else if (promotion.status == 0){ %> 
+                                          
+                                          <p class="text-danger">refuse</p>
+                                        <% } else{ %> 
+                                          
+                                          <p class="text-secundary">encoure</p>
+                                      <% } %>
                                       </td>  
                                       <td class="py-1">
                                           <!-- {{nom}} -->

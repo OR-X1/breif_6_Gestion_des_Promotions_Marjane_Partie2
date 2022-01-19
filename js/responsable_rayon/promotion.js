@@ -13,8 +13,9 @@ const app = express();
 // router.post('/creation', authController.isLoginIn, authController.creation)
 
 router.get("/", (req, res) => {
+  const { cookies } = req
     // const obj = await fetchData()
-    fetch("http://localhost:3030/auth/responsablerayon/getpromo")
+    fetch("http://localhost:3030/auth/responsablerayon/getpromo/"+cookies.category_rayon)
     .then(res => res.json())
     .then(data => {
 
